@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+.streamlit/secrets.toml
+
+# Keep pre-trained model artifacts and historical telemetry tracked for Streamlit Cloud
+!models/
+!models/*.pkl
+!models/*.pt
+!models/*.csv
+
