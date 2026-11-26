@@ -125,8 +125,14 @@ def fetch_live_usa_telemetry(region_name: str):
         "forecast_days": 3,
         "timezone": "auto",
     }
-    w_resp = requests.get(w_url, params=w_params, timeout=12)
-    w_resp.raise_for_status()
+    for attempt in range(2):
+        try:
+            w_resp = requests.get(w_url, params=w_params, timeout=25)
+            w_resp.raise_for_status()
+            break
+        except requests.exceptions.Timeout:
+            if attempt == 1:
+                raise
     w_data = w_resp.json()
 
     live_grid_mw = None
